@@ -1,9 +1,12 @@
 import { Text, Button, View, StyleSheet, Animated, Alert, Pressable } from "react-native";
 import React, {useEffect, useRef} from 'react';
+import { useNavigation, createStaticNavigation, NavigationProp } from "@react-navigation/native";
 
 const AnimatedPressable = Animated.createAnimatedComponent(Pressable);
 
 export default function Index() {
+
+  const navigation = useNavigation();
 
   const animatedSc = useRef(new Animated.Value(1)).current;
 
@@ -49,15 +52,12 @@ export default function Index() {
     }).start();
   }
 
-
   return (
-    <View
-      style={styles.container}
-    >
+    <View style={styles.container}>
       <Animated.Text style={[styles.text, {transform: [{translateY: bounce}, {scaleX: scaleX}, {scaleY: scaleY}]}, ]}>Welcome</Animated.Text>
       {/* <Button title="hey" onPress={() => Alert.alert('you clicked me :)')}></Button> */}
       {/* <AnimatedPressable onPressIn={handlePressI} onPressOut={handlePressO} onPress={() => Alert.alert('you clicked me :)')} style={[styles.button, {transform: [{scale: animatedSc}]}]} ></AnimatedPressable> */}
-      <Pressable onPressIn={handlePressI} onPressOut={handlePressO} onPress={() => Alert.alert('heyy')}>
+      <Pressable onPressIn={handlePressI} onPressOut={handlePressO} onPress={() => navigation.navigate('Second')}>
         <Animated.View style={[styles.button, {transform: [{scale: animatedSc}]}]}>
         </Animated.View>
       </Pressable>
