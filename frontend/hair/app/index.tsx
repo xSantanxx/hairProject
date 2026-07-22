@@ -1,6 +1,7 @@
 import { Text, Button, View, StyleSheet, Animated, Alert, Pressable } from "react-native";
 import React, {useEffect, useRef} from 'react';
 import { useNavigation, createStaticNavigation, NavigationProp } from "@react-navigation/native";
+import {GlassView} from 'expo-glass-effect';
 
 const AnimatedPressable = Animated.createAnimatedComponent(Pressable);
 
@@ -57,7 +58,7 @@ export default function Index() {
       <Animated.Text style={[styles.text, {transform: [{translateY: bounce}, {scaleX: scaleX}, {scaleY: scaleY}]}, ]}>Welcome</Animated.Text>
       {/* <Button title="hey" onPress={() => Alert.alert('you clicked me :)')}></Button> */}
       {/* <AnimatedPressable onPressIn={handlePressI} onPressOut={handlePressO} onPress={() => Alert.alert('you clicked me :)')} style={[styles.button, {transform: [{scale: animatedSc}]}]} ></AnimatedPressable> */}
-      <Pressable onPressIn={handlePressI} onPressOut={handlePressO} onPress={() => navigation.navigate('Second')}>
+      <Pressable onPressIn={handlePressI} onPressOut={handlePressO} onPress={() => navigation.navigate('startup' as never)}>
         <Animated.View style={[styles.button, {transform: [{scale: animatedSc}]}]}>
         </Animated.View>
       </Pressable>
