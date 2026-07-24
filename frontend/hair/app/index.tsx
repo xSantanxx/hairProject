@@ -58,7 +58,7 @@ export default function Index() {
       <Animated.Text style={[styles.text, {transform: [{translateY: bounce}, {scaleX: scaleX}, {scaleY: scaleY}]}, ]}>Welcome</Animated.Text>
       {/* <Button title="hey" onPress={() => Alert.alert('you clicked me :)')}></Button> */}
       {/* <AnimatedPressable onPressIn={handlePressI} onPressOut={handlePressO} onPress={() => Alert.alert('you clicked me :)')} style={[styles.button, {transform: [{scale: animatedSc}]}]} ></AnimatedPressable> */}
-      <Pressable onPressIn={handlePressI} onPressOut={handlePressO} onPress={() => navigation.navigate('startup' as never)}>
+      <Pressable onPressIn={handlePressI} onPressOut={handlePressO} onPress={() => navigation.navigate('startup')}>
         <Animated.View style={[styles.button, {transform: [{scale: animatedSc}]}]}>
         </Animated.View>
       </Pressable>

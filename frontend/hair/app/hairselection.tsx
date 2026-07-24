@@ -5,6 +5,8 @@ import { useNavigation, createStaticNavigation, NavigationProp, useRoute } from 
 export default function Hair(){
     const [text, setText] = useState('');
     const navigation = useRoute();
+    const navigation2 = useNavigation();
+    
 
     const {name} = navigation.params || {};
 
@@ -12,8 +14,8 @@ export default function Hair(){
         <View style={styles.container}>
         <View style={styles.box}><Text style={styles.text}>{name}</Text></View>
         <View style={styles.box2}>
-        <View style={styles.box3}><Text></Text></View>
-        <View style={styles.box4}><Text></Text></View></View>
+        <View style={styles.box3}><Pressable onPress={() => Alert.alert('Heyy')}><Text style={styles.text}>Ai Mode</Text></Pressable></View>
+        <View style={styles.box4}><Pressable onPress={() => navigation2.navigate('manual')}><Text style={styles.text}>Manual Mode</Text></Pressable></View></View>
         </View>
     );
 }
@@ -45,20 +47,23 @@ const styles = StyleSheet.create({
         left: 70,
         flex: 1,
         justifyContent: 'center',
-        alignItems: 'flex-starts',
         flexDirection: 'row',
     },
     box3: {
         backgroundColor: 'red',
         borderTopLeftRadius: 10,
         borderBottomLeftRadius: 10,
-        flex: 1
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
     },
     box4: {
         backgroundColor: 'green',
         borderTopRightRadius: 10,
         borderBottomRightRadius: 10,
-        flex: 1
-    }
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
 })
 
