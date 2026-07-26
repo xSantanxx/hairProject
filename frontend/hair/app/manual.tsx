@@ -1,6 +1,6 @@
 import { Text, Button, View, StyleSheet, Animated, Alert, Pressable, TextInput, Image } from "react-native";
 import React, {useEffect, useRef, useState} from 'react';
-import { useNavigation, createStaticNavigation, NavigationProp } from "@react-navigation/native";
+import { useNavigation, createStaticNavigation, NavigationProp, useRoute } from "@react-navigation/native";
 
 export default function Manual(){
     const [text, setText] = useState('');
@@ -9,6 +9,8 @@ export default function Manual(){
     const [selectedHairType, setSelectedHairType] = useState('');
     const [selectedHairActualType, setSelectedHairActualType] = useState('');
     const [hairTypeTextVisible, setHairTypeTextVisible] = useState(false);
+    const preventRun = useRef(false);
+    const [selectedHairTypeImage, setSelectedHairTypeImage] = useState('');
 
     const images = [{
         id: 1,
@@ -74,6 +76,17 @@ export default function Manual(){
 
     const filteredImages = images.filter((item) => item.hairType === selectedHairType);
 
+    const {name} = navigation.params || {};
+
+    const navigation2 = useNavigation();
+
+    useEffect(() => {
+        if (preventRun.current){
+            navigation2.navigate('mainscreen', {name: name, hairType: selectedHairActualType, hairTypeImage: selectedHairTypeImage});
+        }
+        preventRun.current = true;
+    }, [selectedHairActualType]);
+
     return(
         <View style={styles.container}>
             {selectedHairActualType && (
@@ -88,7 +101,7 @@ export default function Manual(){
                             <Pressable
                                 key={item.id}
                                 style={styles.box}
-                                onPress={() => {setSelectedHairActualType(item.text); Alert.alert(item.text); setHiddenBoxVisible(false); setHairTypeTextVisible(true);}}
+                                onPress={() => {setSelectedHairActualType(item.text); Alert.alert(item.text); setHiddenBoxVisible(false); setHairTypeTextVisible(true); setSelectedHairTypeImage(item.image);}}
                             >
                                 <Image source={item.image} style={styles.image} />
                                 <Text style={styles.text}>{item.text}</Text>

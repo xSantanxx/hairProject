@@ -15,7 +15,7 @@ export default function Hair(){
         <View style={styles.box}><Text style={styles.text}>{name}</Text></View>
         <View style={styles.box2}>
         <View style={styles.box3}><Pressable onPress={() => Alert.alert('Heyy')}><Text style={styles.text}>Ai Mode</Text></Pressable></View>
-        <View style={styles.box4}><Pressable onPress={() => navigation2.navigate('manual')}><Text style={styles.text}>Manual Mode</Text></Pressable></View></View>
+        <View style={styles.box4}><Pressable onPress={() => navigation2.navigate('manual', {name: name})}><Text style={styles.text}>Manual Mode</Text></Pressable></View></View>
         </View>
     );
 }
