@@ -1,7 +1,7 @@
 import { useNavigation, useRoute } from "@react-navigation/native";
 import { View, Text, StyleSheet, Pressable, Image, ScrollView } from "react-native";
-
-
+import { useState } from "react";
+import { GlassView } from "expo-glass-effect";
 
 export default function MainScreen(){
 
@@ -9,24 +9,27 @@ export default function MainScreen(){
 
     const {name, hairType, hairTypeImage} = navigation.params || {};
 
+    const [activeTab, setActiveTab] = useState<string>('porosity');
+
     return (
         <View style={styles.container}>
             <View style={styles.box}><Text style={styles.text}>{name ?? 'Default Name'}</Text>
             </View>
-            
             <View style={styles.box2}>
                 <View style={styles.box3}>
                 <Image source={hairTypeImage} style={styles.image} />
                 </View>
                 <Text style={styles.text}>{hairType}🧑‍🦳</Text>
-                <View style={styles.box4}>
+            </View>
+            <View style={styles.box5}>
+            <GlassView glassEffectStyle="clear" tintColor="lightblue" style={styles.glassView}>
                 <ScrollView horizontal={true}>
-                    <Pressable style={styles.button}><Text style={styles.text}>Porosity Test🧑‍🦳</Text></Pressable>
-                    <Pressable style={styles.button}><Text style={styles.text}>Scalp Help🧑‍🦳</Text></Pressable>
-                    <Pressable style={styles.button}><Text style={styles.text}>Hair Type🧑‍🦳</Text></Pressable>
-                    <Pressable style={styles.button}><Text style={styles.text}>Hair Type🧑‍🦳</Text></Pressable>
+                    <Pressable onPress={() => setActiveTab('porosity')} style={[styles.button, activeTab === 'porosity' && styles.buttonAct]}><Text style={styles.text}>Porosity Test🧑‍🦳</Text></Pressable>
+                    <Pressable onPress={() => setActiveTab('scalp')} style={[styles.button, activeTab === 'scalp' && styles.buttonAct]}><Text style={styles.text}>Scalp Help🧑‍🦳</Text></Pressable>
+                    <Pressable onPress={() => setActiveTab('hairType')} style={[styles.button, activeTab === 'hairType' && styles.buttonAct]}><Text style={styles.text}>Hair Type🧑‍🦳</Text></Pressable>
+                    <Pressable onPress={() => setActiveTab('care')} style={[styles.button, activeTab === 'care' && styles.buttonAct]}><Text style={styles.text}>Hair Type🧑‍🦳</Text></Pressable>
                 </ScrollView>
-                </View>
+                </GlassView>
             </View>
         </View>
     );
@@ -73,7 +76,6 @@ const styles = StyleSheet.create({
         borderWidth: 2,
         padding: 4,
         borderRadius: 10,
-        backgroundColor: 'lightyellow',
         width: '100%',
         marginTop: 10,
         top: 10,
@@ -82,16 +84,37 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },  
     button: {
-        borderWidth: 2,
         padding: 4,
-        borderRadius: 10,
-        backgroundColor: 'lightyellow',
+        borderRadius: 16,
         minHeight: 10,
         marginRight: 5,
+    },
+    buttonAct: {
+        backgroundColor: 'rgba(255, 255, 255, 0.45)',
+        padding: 5,
+        borderColor: 'white',
     },
     image: {
         height: '100%',
         width: '100%',
         resizeMode: 'contain',
+    },
+    glassView: {
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        padding: 10,
+        flexDirection: 'row',
+    },
+    box5: {
+        position: 'absolute',
+        bottom: 20,
+        left: 0,
+        right: 0,
+        zIndex: 1000,
+        marginBottom: 10,
+        marginLeft: 10,
+        marginRight: 10,
+        borderRadius: 20,
+        overflow: 'hidden',
     },
 });
